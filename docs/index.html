@@ -2,19 +2,19 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Carta de Aniversario</title>
   <link rel="stylesheet" href="css/estilos.css" />
 </head>
 <body>
   <!-- Vídeo de sparkles de fondo -->
   <video id="background-video" autoplay muted playsinline loop>
-    <source src="media/video/Particles Fire Sparks.mp4" type="video/mp4"/>
+    <source src="media/video/Particles Fire Sparks.mp4" type="video/mp4" />
   </video>
 
   <!-- Vídeo overlay sorpresa (mute) -->
   <video id="overlay-video" autoplay muted playsinline loop>
-    <source src="media/video/sorpresa.mp4" type="video/mp4"/>
+    <source src="media/video/sorpresa.mp4" type="video/mp4" />
   </video>
 
   <!-- Encabezado -->
@@ -38,9 +38,11 @@
 
   <!-- Carrusel Polaroid -->
   <section id="polaroid-carousel" class="carousel-section">
-    <button id="polaroid-prev" class="carousel-btn">&lt;</button>
-    <div id="polaroid-slide" class="carousel"></div>
-    <button id="polaroid-next" class="carousel-btn">&gt;</button>
+    <div class="carousel">
+      <button id="polaroid-prev" class="carousel-btn">&lt;</button>
+      <div id="polaroid-slide"></div>
+      <button id="polaroid-next" class="carousel-btn">&gt;</button>
+    </div>
   </section>
 
   <!-- Vídeo cinematográfico -->
@@ -48,7 +50,7 @@
     <div class="video-wrapper">
       <h2 class="video-titulo">Nuestro amor, capturado en destellos de memoria</h2>
       <video id="video-sorpresa" controls poster="media/video/poster.jpg">
-        <source src="media/video/sorpresa.mp4" type="video/mp4"/>
+        <source src="media/video/sorpresa.mp4" type="video/mp4" />
         Tu navegador no soporta video HTML5.
       </video>
     </div>
