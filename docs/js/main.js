@@ -1,4 +1,6 @@
-// 1. Lista de pistas
+// js/main.js
+
+// 1. Lista de pistas con flag para boost de volumen
 const tracks = [
   { file: "hero.mp3",                 title: "Hero",                 cover: "media/Portadas canciones/hero-cover.jpg",               boost: true  },
   { file: "iris.mp3",                 title: "Iris",                 cover: "media/Portadas canciones/iris-cover.jpg",               boost: false },
@@ -6,23 +8,27 @@ const tracks = [
   { file: "young-and-beautiful.mp3",  title: "Young and Beautiful", cover: "media/Portadas canciones/young-and-beautiful.jpg",         boost: false }
 ];
 
-// 2. Modal de selección de canción
+// 2. Muestra un modal para seleccionar la canción de fondo
 function showAudioModal() {
   const modal = document.createElement("div");
   modal.id = "audio-modal";
-  modal.style = "position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;z-index:10;";
   const content = document.createElement("div");
-  content.style = "background:#fff;padding:2rem;border-radius:8px;text-align:center;max-width:90%;";
+  content.className = "modal-content";
+
   const prompt = document.createElement("p");
+  prompt.className = "modal-prompt";
   prompt.textContent = "¿Con qué canción quieres acompañar nuestra historia de amor?";
   content.appendChild(prompt);
 
   tracks.forEach(t => {
     const div = document.createElement("div");
-    div.style = "display:inline-block;margin:1rem;cursor:pointer;";
-    div.innerHTML = `<img src="${encodeURI(t.cover)}" alt="${t.title}" style="width:100px;border-radius:8px;"/><p>${t.title}</p>`;
+    div.className = "track";
+    div.innerHTML = `
+      <img src="${encodeURI(t.cover)}" alt="${t.title}"/>
+      <p>${t.title}</p>
+    `;
     div.addEventListener("click", () => {
-      bgAudio.src = `media/audio/${t.file}`;
+      bgAudio.src = encodeURI(`media/audio/${t.file}`);
       bgAudio.loop = true;
       bgAudio.volume = t.boost ? 1.0 : 0.5;
       bgAudio.play();
@@ -35,24 +41,26 @@ function showAudioModal() {
   document.body.appendChild(modal);
 }
 
-// 3. Typewriter para carta-scroll
+// 3. Efecto máquina de escribir para la carta scrollable
 function typeScroll() {
   const cont = document.getElementById("carta-scroll");
-  fetch("content/carta-scroll.txt").then(r => r.text()).then(text => {
-    cont.textContent = "";
-    const p = document.createElement("p");
-    cont.appendChild(p);
-    let i = 0, speed = 25;
-    (function typer() {
-      if (i < text.length) {
-        p.textContent += text.charAt(i++);
-        setTimeout(typer, speed);
-      }
-    })();
-  });
+  fetch("content/carta-scroll.txt")
+    .then(r => r.text())
+    .then(text => {
+      cont.textContent = "";
+      const p = document.createElement("p");
+      cont.appendChild(p);
+      let i = 0, speed = 25;
+      (function typer() {
+        if (i < text.length) {
+          p.textContent += text.charAt(i++);
+          setTimeout(typer, speed);
+        }
+      })();
+    });
 }
 
-// 4. Carrusel Polaroid
+// 4. Inicializa un carrusel Polaroid con controles prev/next
 function initPolaroidCarousel(selector, filenames) {
   const slideContainer = document.getElementById("polaroid-slide");
   const prev = document.getElementById("polaroid-prev");
@@ -62,7 +70,7 @@ function initPolaroidCarousel(selector, filenames) {
     const frame = document.createElement("div");
     frame.className = "polaroid-frame";
     const img = document.createElement("img");
-    img.src = `media/carrusel/${fn}`;
+    img.src = encodeURI(`media/carrusel/${fn}`);
     frame.appendChild(img);
     const name = fn.replace(/\.[^/.]+$/, "");
     const caption = document.createElement("div");
@@ -88,7 +96,7 @@ function initPolaroidCarousel(selector, filenames) {
   show();
 }
 
-// 5. Animar al scroll
+// 5. Anima elementos al hacer scroll
 function animarAlScroll(selector, cls = "mostrar") {
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => {
@@ -101,27 +109,25 @@ function animarAlScroll(selector, cls = "mostrar") {
   document.querySelectorAll(selector).forEach(el => obs.observe(el));
 }
 
-// 6. Intentar play + fallback touchstart
-function tryPlay(video) {
-  if (!video) return;
-  video.play().catch(() => {
-    const onFirstTouch = () => {
-      video.play();
-      window.removeEventListener("touchstart", onFirstTouch);
-    };
-    window.addEventListener("touchstart", onFirstTouch, { once: true });
-  });
-}
-
-// 7. Lógica principal
+// 6. Lógica principal al cargar la página
 document.addEventListener("DOMContentLoaded", () => {
-  // 7.1 Detección de GitHub Pages vs local
+
+  // —————— 1) Detectar entorno (local vs. GitHub Pages) ——————
   const isGithub = window.location.hostname.includes("github.io");
   if (isGithub) {
+    // Background sparkles
     const bg = document.getElementById("background-video");
-    if (bg) { bg.src = "https://github.com/roblesvalverde22-sudo/aniversario-mi-novia/releases/download/v1.0/Particles.Fire.Sparks.mp4"; bg.load(); }
+    if (bg) {
+      bg.src = "https://github.com/roblesvalverde22-sudo/aniversario-mi-novia/releases/download/v1.0/Particles.Fire.Sparks.mp4";
+      bg.load();
+    }
+    // Overlay video
     const overlay = document.getElementById("overlay-video");
-    if (overlay) { overlay.src = "https://github.com/roblesvalverde22-sudo/aniversario-mi-novia/releases/download/v1.0/sorpresa.mp4"; overlay.load(); }
+    if (overlay) {
+      overlay.src = "https://github.com/roblesvalverde22-sudo/aniversario-mi-novia/releases/download/v1.0/sorpresa.mp4";
+      overlay.load();
+    }
+    // Sección de video con controles
     const vidSpec = document.getElementById("video-sorpresa");
     if (vidSpec) {
       const srcTag = vidSpec.querySelector("source");
@@ -130,32 +136,28 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // 7.2 Arrancar vídeos de fondo
-  tryPlay(document.getElementById("background-video"));
-  tryPlay(document.getElementById("overlay-video"));
-
-  // 7.3 Música de fondo
+  // —————— 2) Música de fondo ——————
   window.bgAudio = new Audio();
   bgAudio.volume = 0.5;
   showAudioModal();
 
-  // 7.4 Lógica del sobre
+  // —————— 3) Lógica del sobre ——————
   const sobreImg = document.getElementById("sobre-img");
   sobreImg.addEventListener("click", () => {
     sobreImg.src = "media/Sobre/sobre-abierto.png";
     sobreImg.classList.add("opened");
-    document.querySelector(".contenido-carta").classList.add("show");
+    document.getElementById("carta-fija").classList.add("show");
   });
 
-  // 7.5 Carta fija
-  fetch("content/carta.txt").then(r => r.text()).then(t => {
-    document.querySelector(".contenido-carta").innerText = t.trim();
-  });
+  // —————— 4) Carta fija ——————
+  fetch("content/carta.txt")
+    .then(r => r.text())
+    .then(t => document.querySelector(".contenido-carta").innerText = t.trim());
 
-  // 7.6 Carta scroll
+  // —————— 5) Carta scrollable ——————
   typeScroll();
 
-  // 7.7 Carrusel Polaroid
+  // —————— 6) Carrusel Polaroid ——————
   const slideFiles = [
     "14 de febrero 2025.jpeg",
     "31 de diciembre. año nuevo.jpeg",
@@ -173,25 +175,26 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
   initPolaroidCarousel(".carousel", slideFiles);
 
-  // 7.8 Verso final
-  fetch("content/verso.txt").then(r => r.text()).then(t => {
-    document.getElementById("verso-final").innerText = t.trim();
-  });
+  // —————— 7) Verso final ——————
+  fetch("content/verso.txt")
+    .then(r => r.text())
+    .then(t => document.getElementById("verso-final").innerText = t.trim());
 
-  // 7.9 Animaciones al scroll
+  // —————— 8) Animaciones al scroll ——————
   animarAlScroll("#video-especial, #verso-final");
 
-  // 7.10 Interplay vídeo/audio
+  // —————— 9) Interplay video / audio ——————
   const vid = document.getElementById("video-sorpresa");
   if (vid) {
     vid.addEventListener("play",  () => bgAudio.pause());
     vid.addEventListener("pause", () => bgAudio.play());
   }
 
-  // 7.11 Cambiar canción
+  // —————— 10) Sección cambiar canción ——————
   document.getElementById("change-song-btn").addEventListener("click", showAudioModal);
 
-  // 7.12 Controles manuales
-  document.getElementById("play-btn").addEventListener("click",  () => bgAudio.play());
+  // —————— 11) Controles manuales ——————
+  document.getElementById("play-btn").addEventListener("click", () => bgAudio.play());
   document.getElementById("pause-btn").addEventListener("click", () => bgAudio.pause());
+
 });
