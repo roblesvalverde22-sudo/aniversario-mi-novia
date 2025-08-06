@@ -1,226 +1,226 @@
-/* ================================
-   TIPOGRAFÍAS & RESET
-================================ */
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap');
-
+/* RESET & TIPOGRAFÍAS */
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap');
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: #0e0e0e;
+  background: #0e0e0e;
   color: #f4f4f4;
   overflow-x: hidden;
   position: relative;
 }
 
-/* Vídeos de fondo */
-#background-video {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  object-fit: cover;
-  z-index: -2;
-}
+/* FONDOS DE VIDEO */
+#background-video,
 #overlay-video {
   position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
+  top: 50%; left: 50%;
+  min-width: 100%; min-height: 100%;
+  transform: translate(-50%, -50%);
   object-fit: cover;
-  opacity: 0.65;
-  z-index: -1;
+}
+#background-video { z-index: -3; }
+#overlay-video    { z-index: -2; opacity: 0.65; }
+
+/* MODAL DE AUDIO */
+#audio-modal {
+  position: fixed; top:0; left:0;
+  width:100%; height:100%;
+  background: rgba(0,0,0,0.85);
+  display:flex; align-items:center; justify-content:center;
+  z-index:999;
+}
+#audio-modal .modal-content {
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px,1fr));
+  gap: 0.5rem;
+  max-width: 400px; padding:1rem;
+  background:#111; border-radius:8px;
+}
+#audio-modal .modal-prompt {
+  grid-column:1/-1;
+  text-align:center;
+  font-size:1rem; color:#f4f4f4;
+  margin-bottom:0.5rem;
+}
+#audio-modal .track {
+  text-align:center; cursor:pointer;
+  transition:transform .2s;
+}
+#audio-modal .track img {
+  width:80px; height:80px; object-fit:cover;
+  border-radius:4px; margin-bottom:0.25rem;
+}
+#audio-modal .track:hover {
+  transform:scale(1.05);
+}
+#audio-modal .track p {
+  font-size:0.8rem; color:#facc15;
 }
 
-/* ================================
-   ENCABEZADO
-================================ */
+/* MÁRGENES GENERALES */
+header,
+.carta-wrapper,
+.carta-scroll,
+.carousel,
+#video-especial,
+#verso-final,
+#audio-section {
+  max-width:960px;
+  margin:2rem auto;
+  padding:0 1rem;
+}
+
+/* ENCABEZADO */
 #intro {
-  text-align: center;
-  padding: 3rem 1rem 2rem;
+  text-align:center;
+  padding:3rem 1rem 2rem;
 }
 #intro h1 {
-  font-family: 'Great Vibes', cursive;
-  font-size: 3rem;
-  color: #facc15;
-  margin-bottom: 0.5rem;
-  animation: fadeInUp 1.2s ease both;
+  font-family:'Great Vibes',cursive;
+  font-size:3rem; color:#facc15;
+  animation:fadeInUp 1.2s ease-in-out forwards;
 }
 .subtitulo {
-  font-size: 1.2rem;
-  font-weight: 300;
-  color: #fef9c3;
-  opacity: 0.8;
-  animation: fadeInUp 2s ease both;
+  font-size:1.2rem; font-weight:300;
+  color:#fef9c3; opacity:0.8;
+  animation:fadeInUp 2s ease-in-out forwards;
 }
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(15px); }
-  to   { opacity: 1; transform: translateY(0);  }
+  0%   { opacity:0; transform:translateY(15px); }
+  100% { opacity:1; transform:translateY(0); }
 }
 
-/* ================================
-   SECCIÓN SOBRE + CARTA FIJA
-================================ */
-#carta-fija {
-  text-align: center;
-  margin: 2rem 0;
+/* SOBRE INTERACTIVO */
+.sobre {
+  width:300px; margin:2rem auto;
+  text-align:center; cursor:pointer;
 }
-#carta-fija img {
-  width: 200px;
-  cursor: pointer;
-  transition: transform 0.3s;
+.sobre img {
+  background:black;
+  padding:0.5rem; border-radius:8px;
+  max-width:100%; transition:transform .5s ease;
 }
-#carta-fija img.opened {
-  transform: translateY(-20px);
-}
-.contenido-carta {
-  max-width: 800px;
-  margin: 1rem auto;
-  font-size: 1rem;
-  line-height: 1.6;
-  display: none;
-}
-.contenido-carta.show {
-  display: block;
+.sobre img.opened {
+  background:none;
 }
 
-/* ================================
-   CARTA SCROLLABLE (Typewriter)
-================================ */
+/* CARTA FIJA */
+.carta-wrapper.hidden {
+  opacity:0; transform:scale(0.8);
+  transform-origin:top center;
+  transition:opacity .6s ease, transform .6s ease;
+}
+.carta-wrapper.show {
+  opacity:1; transform:scale(1);
+}
+.carta-fija {
+  background:rgba(255,255,255,0.05);
+  border-radius:16px; padding:2rem;
+  box-shadow:0 8px 24px rgba(0,0,0,0.6);
+  backdrop-filter:blur(6px);
+}
+
+/* CARTA SCROLLABLE */
 .carta-scroll {
-  max-width: 800px;
-  margin: auto;
-  padding: 1rem 1.5rem;
-  font-size: 1.1rem;
-  line-height: 1.8;
-  min-height: 200px;
+  background:rgba(0,0,0,0.3);
+  border-radius:8px; padding:2rem;
+  white-space:pre-wrap; font-size:1.1rem; line-height:1.6;
+  position:relative;
+}
+.carta-scroll::before {
+  content:'';
+  position:absolute; top:0; left:0;
+  width:4px; height:100%;
+  background:#facc15;
+  border-top-left-radius:8px; border-bottom-left-radius:8px;
 }
 
-/* ================================
-   CARRUSEL POLAROID
-================================ */
-.carousel-section {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin: 2rem 0;
+/* CARRUSEL POLAROID (slider) */
+.carousel {
+  display:flex; align-items:center; justify-content:center; gap:1rem;
 }
 .carousel-btn {
-  background: rgba(0,0,0,0.5);
-  border: none;
-  color: #f4f4f4;
-  font-size: 1.5rem;
-  padding: 0.5rem;
-  cursor: pointer;
-  border-radius: 4px;
+  font-size:2rem;
+  background:rgba(250,203,21,0.8);
+  border:none; padding:0.5rem 1rem;
+  border-radius:4px; cursor:pointer;
 }
-.carousel {
-  width: 300px;
-  height: 400px;
-  overflow: hidden;
-  position: relative;
+#polaroid-slide {
+  width:320px; height:360px;
+  display:flex; align-items:center; justify-content:center;
 }
 .polaroid-frame {
-  position: relative;
-  width: 100%;
-  background: #fff;
-  padding: 0.5rem 0.5rem 2rem;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  border: 1px solid #eee;
-  border-radius: 4px;
-  text-align: center;
+  position:relative;
+  background:#fff;
+  padding:0.5rem 0.5rem 2rem;
+  border:1px solid #eee; border-radius:4px;
+  box-shadow:0 4px 8px rgba(0,0,0,0.2);
+  transition:transform .2s;
+}
+.polaroid-frame:hover {
+  transform:translateY(-5px) rotate(-1deg);
 }
 .polaroid-frame img {
-  max-width: 100%;
-  height: auto;
+  max-width:100%; height:auto; border-radius:4px;
 }
-.polaroid-caption {
-  position: absolute;
-  bottom: 0.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 0.9rem;
-  color: #333;
+.polaroid-frame .polaroid-caption {
+  position:absolute; bottom:0.5rem; left:50%;
+  transform:translateX(-50%);
+  font-size:0.9rem; color:#333; white-space:nowrap;
 }
 
-/* ================================
-   VIDEO CINEMATOGRÁFICO
-================================ */
-#video-especial {
-  padding: 3rem 1rem;
-  text-align: center;
-}
+/* VIDEO ESPECIAL */
 .video-wrapper {
-  max-width: 960px;
-  margin: auto;
-}
-.video-titulo {
-  font-family: 'Great Vibes', cursive;
-  font-size: 2rem;
-  color: #facc15;
-  margin-bottom: 1rem;
-  animation: fadeInUp 1.5s ease both;
+  margin-top:1rem; max-width:600px; margin-left:auto; margin-right:auto;
 }
 #video-sorpresa {
-  width: 100%;
-  border-radius: 10px;
-  box-shadow: 0 0 25px rgba(255,204,0,0.2);
-  background: #000;
+  width:100%; height:auto; border-radius:8px;
+  box-shadow:0 0 25px rgba(255,204,0,0.2); background:#000;
 }
 
-/* ================================
-   VERSO FINAL
-================================ */
+/* VERSO FINAL */
 #verso-final {
-  font-family: 'Great Vibes', cursive;
-  font-size: 1.8rem;
-  color: #fef9c3;
-  text-align: center;
-  padding: 3rem 2rem;
-  line-height: 1.5;
-  opacity: 0.9;
+  font-family:'Great Vibes',cursive;
+  font-size:1.6rem; line-height:1.5;
+  text-align:center; color:#fef9c3;
 }
 
-/* ================================
-   CONTROLES DE AUDIO
-================================ */
-.audio-controls {
-  text-align: center;
-  margin: 2rem 0;
+/* CAMBIAR CANCIÓN */
+#change-song {
+  text-align:center; margin:2rem auto;
 }
-.audio-controls button {
-  margin: 0 0.5rem;
-  padding: 0.5rem 1rem;
-  background: #facc15;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+#change-song-btn {
+  padding:0.5rem 1rem;
+  background:#facc15; border:none;
+  color:#111; border-radius:4px;
+  cursor:pointer; transition:background .3s;
+}
+#change-song-btn:hover {
+  background:#e5b500;
 }
 
-/* ================================
-   FALLBACK MÓVIL
-================================ */
-@media screen and (max-width: 768px) {
-  #background-video,
-  #overlay-video {
-    display: none;
-  }
-  body {
-    background: url("../media/stickers/fuego.svg") center/cover no-repeat,
-                #0e0e0e;
-  }
+/* AUDIO SECTION */
+#audio-section {
+  text-align:center;
+}
+#audio-section button {
+  margin:0.5rem; padding:0.5rem 1rem;
+  background:#facc15; border:none; color:#111;
+  border-radius:4px; cursor:pointer; transition:background .3s;
+}
+#audio-section button:hover {
+  background:#e5b500;
 }
 
-/* ================================
-   GLOBAL MEDIA QUERIES
-================================ */
-@media screen and (max-width: 600px) {
-  #intro h1 { font-size: 2.2rem; }
-  .subtitulo { font-size: 1rem; }
-  .video-titulo { font-size: 1.4rem; }
-  .carta-scroll { font-size: 1rem; padding: 1rem; }
-  .carousel-section { flex-direction: column; }
-  #verso-final { font-size: 1.4rem; }
+/* RESPONSIVE */
+@media(max-width:600px) {
+  #intro h1 { font-size:2.2rem; }
+  .subtitulo { font-size:1rem; }
+  #polaroid-slide { width:240px; height:270px; }
+  .polaroid-frame { padding:0.5rem 0.5rem 1.5rem; }
+  #video-sorpresa { }
 }
