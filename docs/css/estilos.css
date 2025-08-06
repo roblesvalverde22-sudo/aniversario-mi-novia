@@ -203,12 +203,14 @@ body {
    FALLBACK MÓVIL
 ================================ */
 @media screen and (max-width: 768px) {
-  /* Ocultamos solo el overlay, no el sparkles */
-  #overlay-video { display: none; }
-  /* Puedes mantener o eliminar el fondo estático */
-  /* body { background: #0e0e0e; } */
-}
-
+  #background-video,
+  #overlay-video {
+    display: none;
+  }
+  body {
+    background: url("../media/stickers/fuego.svg") center/cover no-repeat,
+                #0e0e0e;
+  }
 }
 
 /* ================================
@@ -222,4 +224,3 @@ body {
   .carousel-section { flex-direction: column; }
   #verso-final { font-size: 1.4rem; }
 }
-
