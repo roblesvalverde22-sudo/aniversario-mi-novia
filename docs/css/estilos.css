@@ -12,7 +12,8 @@ body {
 }
 
 /* Vídeos de fondo */
-#background-video, #overlay-video {
+#background-video,
+#overlay-video {
   position:fixed; top:0; left:0;
   width:100vw; height:100vh;
   object-fit:cover;
@@ -25,92 +26,129 @@ body {
 ================================ */
 #intro { text-align:center; padding:3rem 1rem 2rem; }
 #intro h1 {
-  font-family:'Great Vibes',cursive; font-size:3rem; color:#facc15;
+  font-family:'Great Vibes',cursive;
+  font-size:3rem;
+  color:#facc15;
   margin-bottom:0.5rem;
   animation:fadeInUp 1.2s ease both;
 }
 .subtitulo {
-  font-size:1.2rem; font-weight:300; color:#fef9c3; opacity:0.8;
+  font-size:1.2rem;
+  font-weight:300;
+  color:#fef9c3;
+  opacity:0.8;
   animation:fadeInUp 2s ease both;
 }
 @keyframes fadeInUp {
-  from{opacity:0;transform:translateY(15px);}
-  to  {opacity:1;transform:translateY(0);}
+  from{opacity:0;transform:translateY(15px);}  
+  to  {opacity:1;transform:translateY(0);}  
 }
 
 /* ================================
-   ANCHO Y FONDO CARTA
+   SOBRE + CARTA FIJA
 ================================ */
-.card-bg {
+#carta-fija {
+  display:flex;
+  justify-content:center;
+  margin:2rem 0;
+}
+#carta-fija .card-bg {
   background:rgba(0,0,0,0.6);
   padding:1rem;
   border-radius:10px;
-  display:inline-block;
+  max-width:800px;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
 }
-#carta-fija .card-bg { max-width:800px; margin:2rem auto; }
-#carta-fija img.opened+ .contenido-carta { display:block; }
-
-/* ================================
-   SECCIÓN SOBRE + CARTA FIJA
-================================ */
 #carta-fija img {
-  width:200px; cursor:pointer;
+  max-width:150px;
+  width:100%;
+  cursor:pointer;
   transition:transform 0.3s;
 }
 #carta-fija img.opened { transform:translateY(-20px); }
 .contenido-carta {
   display:none;
   margin-top:1rem;
-  font-size:1rem; line-height:1.6;
+  font-size:1rem;
+  line-height:1.6;
   color:#f4f4f4;
+  text-align:left;
+  width:100%;
 }
+#carta-fija img.opened + .contenido-carta { display:block; }
 
 /* ================================
    CARTA SCROLLABLE
 ================================ */
 .carta-scroll {
-  max-width:800px; margin:2rem auto;
+  max-width:800px;
+  margin:2rem auto;
   position:relative;
+  text-align:left;
 }
 .carta-scroll .card-bg {
-  position:absolute; top:0; left:50%;
-  transform:translateX(-50%);
+  position:absolute;
+  top:0; left:50%; transform:translateX(-50%);
   width:100%; height:100%; z-index:1;
+  background:rgba(0,0,0,0.6);
+  border-radius:10px;
 }
 .carta-scroll p {
-  position:relative; z-index:2;
-  font-size:1.1rem; line-height:1.8;
-  padding:1rem; color:#f4f4f4;
+  position:relative;
+  z-index:2;
+  padding:1rem;
+  font-size:1.1rem;
+  line-height:1.8;
+  color:#f4f4f4;
 }
 
 /* ================================
    CARRUSEL POLAROID
 ================================ */
-.carousel-section {
-  display:flex; align-items:center; justify-content:center;
-  gap:1rem; margin:2rem 0;
-}
-.carousel-btn {
-  background:rgba(0,0,0,0.5); border:none;
-  color:#f4f4f4; font-size:1.5rem;
-  padding:.5rem; cursor:pointer; border-radius:4px;
-}
 .carousel {
-  width:300px; height:400px; overflow:hidden; position:relative;
+  position:relative;
+  width:300px;
+  height:400px;
+  margin:auto;
+  overflow:hidden;
 }
 .polaroid-frame {
-  position:relative; width:100%;
-  background:#fff; padding:.5rem .5rem 2rem;
+  position:relative;
+  width:100%;
+  background:#fff;
+  padding:.5rem .5rem 2rem;
   box-shadow:0 4px 8px rgba(0,0,0,0.2);
-  border:1px solid #eee; border-radius:4px;
+  border:1px solid #eee;
+  border-radius:4px;
   text-align:center;
 }
 .polaroid-frame img { max-width:100%; height:auto; }
 .polaroid-caption {
-  position:absolute; bottom:.5rem; left:50%;
+  position:absolute;
+  bottom:.5rem;
+  left:50%;
   transform:translateX(-50%);
-  font-size:.9rem; color:#333;
+  font-size:.9rem;
+  color:#333;
 }
+.carousel-btn {
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:rgba(0,0,0,0.5);
+  border:none;
+  color:#f4f4f4;
+  font-size:1.5rem;
+  padding:.5rem;
+  cursor:pointer;
+  border-radius:4px;
+  z-index:3;
+}
+#polaroid-prev { left:5px; }
+#polaroid-next { right:5px; }
 
 /* ================================
    VIDEO CINEMATOGRÁFICO
@@ -118,11 +156,15 @@ body {
 #video-especial { padding:3rem 1rem; text-align:center; }
 .video-wrapper { max-width:960px; margin:auto; }
 .video-titulo {
-  font-family:'Great Vibes',cursive; font-size:2rem; color:#facc15;
-  margin-bottom:1rem; animation:fadeInUp 1.5s ease both;
+  font-family:'Great Vibes',cursive;
+  font-size:2rem;
+  color:#facc15;
+  margin-bottom:1rem;
+  animation:fadeInUp 1.5s ease both;
 }
 #video-sorpresa {
-  width:100%; border-radius:10px;
+  width:100%;
+  border-radius:10px;
   box-shadow:0 0 25px rgba(255,204,0,0.2);
   background:#000;
 }
@@ -131,9 +173,13 @@ body {
    VERSO FINAL
 ================================ */
 #verso-final {
-  font-family:'Great Vibes',cursive; font-size:1.8rem;
-  color:#fef9c3; text-align:center;
-  padding:3rem 2rem; line-height:1.5; opacity:.9;
+  font-family:'Great Vibes',cursive;
+  font-size:1.8rem;
+  color:#fef9c3;
+  text-align:center;
+  padding:3rem 2rem;
+  line-height:1.5;
+  opacity:.9;
 }
 
 /* ================================
@@ -141,9 +187,13 @@ body {
 ================================ */
 .audio-controls { text-align:center; margin:2rem 0; }
 .audio-controls button {
-  margin:0 .5rem; padding:.5rem 1rem;
-  background:#facc15; border:none; border-radius:4px;
-  cursor:pointer; color:#000;
+  margin:0 .5rem;
+  padding:.5rem 1rem;
+  background:#facc15;
+  border:none;
+  border-radius:4px;
+  cursor:pointer;
+  color:#000;
 }
 
 /* ================================
@@ -154,6 +204,6 @@ body {
   .subtitulo { font-size:1rem; }
   .video-titulo { font-size:1.4rem; }
   .carta-scroll p { font-size:1rem; padding:.5rem; }
-  .carousel-section { flex-direction:column; }
+  .carousel { width:90%; height:auto; }
   #verso-final { font-size:1.4rem; }
 }
