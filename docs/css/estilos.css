@@ -36,8 +36,8 @@ body {
   animation:fadeInUp 2s ease both;
 }
 @keyframes fadeInUp {
-  from {opacity:0; transform:translateY(15px);}
-  to   {opacity:1; transform:translateY(0);}
+  from {opacity:0; transform:translateY(15px);} 
+  to   {opacity:1; transform:translateY(0);} 
 }
 
 /* ================================
@@ -102,7 +102,6 @@ body {
 .polaroid-frame {
   position:relative; display:inline-block;
   background:#fff;
-  /* Borde blanco uniforme con base más gruesa */
   border:2px solid #fff;
   padding:5px;
   padding-bottom:25px;
@@ -110,8 +109,8 @@ body {
   border-radius:4px;
   text-align:center;
   box-sizing:border-box;
-  max-width: 300px;
-  width: 100%; 
+  max-width:300px;    /* ancho máximo fijo */
+  width:300px;        /* ancho fijo para no cubrir toda la pantalla */
 }
 .polaroid-frame img {
   display:block; width:100%; height:auto; object-fit:cover;
@@ -123,7 +122,6 @@ body {
   white-space:nowrap; width:calc(100% - 10px);
   overflow:hidden; text-overflow:ellipsis;
 }
-/* Botones junto al frame */
 .carousel-btn {
   position:absolute; top:50%; transform:translateY(-50%);
   background:rgba(0,0,0,0.5); border:none; color:#fff;
@@ -177,10 +175,5 @@ body {
   .subtitulo { font-size:1rem; }
   .video-titulo { font-size:1.4rem; }
   .carta-scroll p { font-size:1rem; padding:.5rem; }
-  .polaroid-frame {
-    padding:4px; padding-bottom:20px;
-  }
+  .polaroid-frame { max-width:200px; width:200px; padding-bottom:20px; }
 }
-
-
-
