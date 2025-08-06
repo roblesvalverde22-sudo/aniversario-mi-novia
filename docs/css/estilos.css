@@ -110,8 +110,8 @@ body {
   border-radius:4px;
   text-align:center;
   box-sizing:border-box;
-  max-width: 500px;
-   width: 300px; 
+  max-width: 300px;
+  width: 100%; 
 }
 .polaroid-frame img {
   display:block; width:100%; height:auto; object-fit:cover;
@@ -181,5 +181,6 @@ body {
     padding:4px; padding-bottom:20px;
   }
 }
+
 
 
