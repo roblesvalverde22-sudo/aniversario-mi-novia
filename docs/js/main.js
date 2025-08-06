@@ -87,6 +87,70 @@ function initPolaroidCarousel(selector, filenames) {
     return frame;
   });
 
+// Lista de imágenes del carrusel
+const galleryFiles = [
+  "14 de febrero 2025.jpeg",
+  "31 de diciembre. año nuevo.jpeg",
+  "con nuestra perrhija.jpeg",
+  "con poquito filtro jaja.jpeg",
+  "De mis fotos favs.jpeg",
+  "Haces todas las salidas especiales.jpeg",
+  "Mi foto fav.jpeg",
+  "Mi persona favorita en mi epoca favorita.jpeg",
+  "Nuestra foto. con la que diran estos eran nuestros papás de jóvenes.jpeg",
+  "Por más momentos felices.jpeg",
+  "que bonitos nos vemos.jpeg",
+  "Siempre con tus detalles. hiceste el 14 de febrero muy especial con el picnic.jpeg",
+  "te amo.jpeg"
+];
+
+document.addEventListener("DOMContentLoaded", () => {
+  // ... (el resto de la inicialización permanece igual)
+
+  // Inicializar carrusel Polaroid
+  initPolaroidCarousel();
+
+  // ...
+});
+
+function initPolaroidCarousel() {
+  const slide = document.getElementById("polaroid-slide");
+  const prev  = document.getElementById("polaroid-prev");
+  const next  = document.getElementById("polaroid-next");
+
+  // Crear todos los frames una sola vez
+  const frames = galleryFiles.map(fn => {
+    const frame = document.createElement("div");
+    frame.className = "polaroid-frame";
+    const img = document.createElement("img");
+    img.src = `media/carrusel/${fn}`;
+    frame.appendChild(img);
+    const cap = document.createElement("div");
+    cap.className = "polaroid-caption";
+    // Nombre sin extensión:
+    cap.textContent = fn.replace(/\.[^/.]+$/, "");
+    frame.appendChild(cap);
+    return frame;
+  });
+
+  let idx = 0;
+  function show() {
+    slide.innerHTML = "";
+    slide.appendChild(frames[idx]);
+  }
+
+  prev.addEventListener("click", () => {
+    idx = (idx - 1 + frames.length) % frames.length;
+    show();
+  });
+  next.addEventListener("click", () => {
+    idx = (idx + 1) % frames.length;
+    show();
+  });
+
+  show();
+}
+
   let idx = 0;
   function show(){ slideContainer.innerHTML=""; slideContainer.appendChild(frames[idx]); }
   prev.onclick = ()=>{ idx=(idx-1+frames.length)%frames.length; show(); };
@@ -188,3 +252,4 @@ document.addEventListener("DOMContentLoaded",()=>{
   document.getElementById("play-btn").onclick=()=>bgAudio.play();
   document.getElementById("pause-btn").onclick=()=>bgAudio.pause();
 });
+
