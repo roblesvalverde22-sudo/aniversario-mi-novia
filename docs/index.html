@@ -2,19 +2,19 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Carta de Aniversario</title>
   <link rel="stylesheet" href="css/estilos.css" />
 </head>
 <body>
   <!-- Vídeo de sparkles de fondo -->
   <video id="background-video" autoplay muted playsinline loop>
-    <source src="media/video/Particles Fire Sparks.mp4" type="video/mp4" />
+    <source src="media/video/Particles Fire Sparks.mp4" type="video/mp4"/>
   </video>
 
   <!-- Vídeo overlay sorpresa (mute) -->
   <video id="overlay-video" autoplay muted playsinline loop>
-    <source src="media/video/sorpresa.mp4" type="video/mp4" />
+    <source src="media/video/sorpresa.mp4" type="video/mp4"/>
   </video>
 
   <!-- Encabezado -->
@@ -25,12 +25,16 @@
 
   <!-- Sobre y carta fija -->
   <section id="carta-fija">
-    <img id="sobre-img" src="media/Sobre/sobre-cerrado.png" alt="Sobre Cerrado" />
-    <div class="contenido-carta"></div>
+    <div class="card-bg">
+      <img id="sobre-img" src="media/Sobre/sobre-cerrado.png" alt="Sobre Cerrado" />
+      <div class="contenido-carta"></div>
+    </div>
   </section>
 
   <!-- Carta scrollable -->
-  <section id="carta-scroll" class="carta-scroll"></section>
+  <section id="carta-scroll" class="carta-scroll">
+    <div class="card-bg"></div>
+  </section>
 
   <!-- Carrusel Polaroid -->
   <section id="polaroid-carousel" class="carousel-section">
@@ -44,7 +48,7 @@
     <div class="video-wrapper">
       <h2 class="video-titulo">Nuestro amor, capturado en destellos de memoria</h2>
       <video id="video-sorpresa" controls poster="media/video/poster.jpg">
-        <source src="media/video/sorpresa.mp4" type="video/mp4" />
+        <source src="media/video/sorpresa.mp4" type="video/mp4"/>
         Tu navegador no soporta video HTML5.
       </video>
     </div>
